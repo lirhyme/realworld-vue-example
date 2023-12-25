@@ -24,6 +24,25 @@ const actions = {
             return data;
         })
         .catch()
+    },
+    fetchProfileFollow(context, payload) {
+        const { username } = payload;
+        return ApiService.post(`profiles/${username}/follow`)
+        .then(({data}) => {
+            context.commit('setProfile', data.profile);
+            return data;
+        })
+        .catch();
+
+    },
+    fetchProfileUnfollow(context, payload) {
+        const { username } = payload;
+        return ApiService.delete(`profiles/${username}/follow`)
+        .then(({data}) => {
+            context.commit('setProfile', data.profile);
+            return data;
+        })
+        .catch();
     }
 }
 
